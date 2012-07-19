@@ -1,3 +1,7 @@
-path.active {
+path.str0 {
     fill: red;
+    fill-opacity: 0;
+}
+path.active {
+    fill-opacity: 1;
 }

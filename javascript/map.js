@@ -8,7 +8,7 @@ Map = (function ($) {
     }
 
     function _setupMunicipios() {
-        d3.selectAll('path.str4').on('mouseover', _toggleActive)
+        d3.selectAll('path.str0').on('mouseover', _toggleActive)
                                  .on('mouseout', _toggleActive);
     };
 
