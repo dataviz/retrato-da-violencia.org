@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require 'csv'
+require 'json'
+
+CODIGO_IBGE = Hash[CSV.read('data/codigo_ibge_municipios_rs.csv').to_a[1..-1]]
+ESTUPROS = CSV.read('data/estupros_mulheres_dados_abertos.csv', :col_sep => ';')[1..-1]
+
+results = {}
+ESTUPROS.each do |estupro|
+  municipio, ano, mes, dia, dia_da_semana, turno, hora, tentado, local, idade_vitima, idade_autor = *estupro
+
+  next if (idade_vitima.to_i.zero? || idade_autor.to_i.zero?)
+
+  municipio = $1 if municipio =~ /\((.*)\)/
+  codigo = "mun_#{CODIGO_IBGE[municipio]}"
+  results[codigo] ||= []
+  results[codigo] << [municipio, turno, local, idade_vitima.to_i, idade_autor.to_i]
+end
+
+resultado = {}
+results.each_pair do |codigo, estupros|
+  media_idade_vitima = estupros.map { |estupro| estupro[3] }.inject(:+) / estupros.length
+  media_idade_autor = estupros.map { |estupro| estupro[4] }.inject(:+) / estupros.length
+  resultado[codigo] = { :nome => estupros[0][0],
+                        :media_idade_vitima => media_idade_vitima,
+                        :media_idade_autor => media_idade_autor }
+end
+
+puts resultado.to_json

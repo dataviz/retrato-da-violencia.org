@@ -5,3 +5,6 @@ path.str0 {
 path.active {
     fill-opacity: 1;
 }
+div#map {
+    float: left;
+}

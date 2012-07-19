@@ -1,9 +1,12 @@
 Map = (function ($) {
+    var Estupros = {};
+
     function initialize(element, svgPath) {
         d3.xml(svgPath, 'image/svg+xml', function (xml) {
             element.html(xml.documentElement);
 
             _setupMunicipios();
+            _loadEstupros();
         });
     }
 
@@ -12,12 +15,26 @@ Map = (function ($) {
                                  .on('mouseout', _toggleActive);
     };
 
+    function _loadEstupros() {
+        $.getJSON('data/dados_estupros.json', function (data) {
+            Estupros = data;
+        });
+    }
+
     function _toggleActive() {
         var d3Element = d3.select(this),
             currentState = d3Element.classed('active');
 
         d3Element.classed('active', !currentState);
+        _showInfo(d3Element.attr('id'));
     };
+
+    function _showInfo(codigo_municipio) {
+        var municipio = Estupros[codigo_municipio];
+        if (!municipio) { return; }
+
+        $('#info').html("<h3>"+municipio.nome+"</h3>"+"<p><em>Vitima</em>: "+municipio.media_idade_vitima+" <em>Autor</em>: "+municipio.media_idade_autor);
+    }
 
     return {
         'initialize': initialize
