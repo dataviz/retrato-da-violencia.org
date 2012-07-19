@@ -33,7 +33,7 @@ Map = (function ($) {
         var municipio = Estupros[codigo_municipio];
         if (!municipio) { return; }
 
-        $('#info').html("<h3>"+municipio.nome+"</h3>"+"<p><em>Vitima</em>: "+municipio.media_idade_vitima+" <em>Autor</em>: "+municipio.media_idade_autor);
+        $('#info').html("<h3>"+municipio.nome+"</h3>"+"<p><em>Vitima</em>: "+municipio.media_idade_vitima+" <em>Autor</em>: "+municipio.media_idade_autor+" ("+municipio.ocorrencias+")");
     }
 
     return {

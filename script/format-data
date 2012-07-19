@@ -23,7 +23,8 @@ results.each_pair do |codigo, estupros|
   media_idade_autor = estupros.map { |estupro| estupro[4] }.inject(:+) / estupros.length
   resultado[codigo] = { :nome => estupros[0][0],
                         :media_idade_vitima => media_idade_vitima,
-                        :media_idade_autor => media_idade_autor }
+                        :media_idade_autor => media_idade_autor,
+                        :ocorrencias => estupros.length }
 end
 
 puts resultado.to_json
