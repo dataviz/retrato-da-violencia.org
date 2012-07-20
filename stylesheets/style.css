@@ -1,10 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffe;
+  font-size: 100%;
+  font-family: Rokkitt, Georgia, serif;
+}
+.top-bar {
+  border-top: 4px solid crimson;
+}
+#info {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+}
+#info h3 {
+  color: crimson;
+  font-size: 2em;
+  border-bottom: 3px solid crimson;
+}
+#info p {
+  font-size: 1.5em;
+}
+#info p em {
+  font-weight: bold;
+  font-style: normal;
+}
 path.fil4 {
-    fill: red !important;
-    fill-opacity: 0 !important;
+  fill: crimson !important;
+  fill-opacity: 0 !important;
 }
 path.active {
-    fill-opacity: 1 !important;
+  fill-opacity: 1 !important;
 }
-div#map {
-    float: left;
+#map #svg2 {
+  height: 600px;
 }
