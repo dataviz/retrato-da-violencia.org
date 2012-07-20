@@ -31,11 +31,11 @@ Map = (function ($) {
 
   function _showInfo(codigo) {
     var municipio       = Estupros[codigo];
+    if (!municipio) { return; }
     var nome_municipio  = "<h3>"+municipio.nome+"</h3>";
     var media_vitima    = "<p class='victim'>Vitima: <em>"+municipio.media_idade_vitima+"</em></p>";
     var media_autor     = "<p class='author'>Autor: <em>"+municipio.media_idade_autor+"</em></p>";
     var ocorrencias     = "<p>"+municipio.ocorrencias+" ocorrências na região</p>";
-    if (!municipio) { return; }
     $('#info').html(nome_municipio + media_vitima + media_autor + ocorrencias);
   }
 
