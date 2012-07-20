@@ -1,9 +1,9 @@
-path.str0 {
-    fill: red;
-    fill-opacity: 0;
+path.fil4 {
+    fill: red !important;
+    fill-opacity: 0 !important;
 }
 path.active {
-    fill-opacity: 1;
+    fill-opacity: 1 !important;
 }
 div#map {
     float: left;

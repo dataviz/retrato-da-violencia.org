@@ -11,7 +11,7 @@ Map = (function ($) {
     }
 
     function _setupMunicipios() {
-        d3.selectAll('path.str0').on('mouseover', _toggleActive)
+        d3.selectAll('path.str4').on('mouseover', _toggleActive)
                                  .on('mouseout', _toggleActive);
     };
 
@@ -26,11 +26,11 @@ Map = (function ($) {
             currentState = d3Element.classed('active');
 
         d3Element.classed('active', !currentState);
-        _showInfo(d3Element.attr('id'));
+        _showInfo(d3Element.attr('id').replace(/.*_/, ''));
     };
 
-    function _showInfo(codigo_municipio) {
-        var municipio = Estupros[codigo_municipio];
+    function _showInfo(codigo) {
+        var municipio = Estupros[codigo];
         if (!municipio) { return; }
 
         $('#info').html("<h3>"+municipio.nome+"</h3>"+"<p><em>Vitima</em>: "+municipio.media_idade_vitima+" <em>Autor</em>: "+municipio.media_idade_autor+" ("+municipio.ocorrencias+")");

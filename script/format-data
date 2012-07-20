@@ -2,7 +2,16 @@
 require 'csv'
 require 'json'
 
-CODIGO_IBGE = Hash[CSV.read('data/codigo_ibge_municipios_rs.csv').to_a[1..-1]]
+CODIGO_IBGE = Hash[CSV.read('data/municipios_rs.csv').to_a[1..-1].map { |x| x[0..-3] }]
+MESOREGIOES = {
+    4301 => "Noroeste Rio-Grandense",
+    4302 => "Nordeste Rio-Grandense",
+    4303 => "Centro Ocidental Rio-Grandense",
+    4304 => "Centro Oriental Rio-Grandense",
+    4305 => "Metropolitana de Porto Alegre",
+    4306 => "Sudoeste Rio-Grandense",
+    4307 => "Sudeste Rio-Grandense"
+}
 ESTUPROS = CSV.read('data/estupros_mulheres_dados_abertos.csv', :col_sep => ';')[1..-1]
 
 results = {}
@@ -12,7 +21,7 @@ ESTUPROS.each do |estupro|
   next if (idade_vitima.to_i.zero? || idade_autor.to_i.zero?)
 
   municipio = $1 if municipio =~ /\((.*)\)/
-  codigo = "mun_#{CODIGO_IBGE[municipio]}"
+  codigo = CODIGO_IBGE[municipio]
   results[codigo] ||= []
   results[codigo] << [municipio, turno, local, idade_vitima.to_i, idade_autor.to_i]
 end
@@ -21,7 +30,7 @@ resultado = {}
 results.each_pair do |codigo, estupros|
   media_idade_vitima = estupros.map { |estupro| estupro[3] }.inject(:+) / estupros.length
   media_idade_autor = estupros.map { |estupro| estupro[4] }.inject(:+) / estupros.length
-  resultado[codigo] = { :nome => estupros[0][0],
+  resultado[codigo] = { :nome => MESOREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
                         :ocorrencias => estupros.length }
