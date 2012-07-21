@@ -30,7 +30,9 @@ path.fil4 {
   fill-opacity: 0 !important;
 }
 path.active {
-  fill-opacity: 1 !important;
+  fill-opacity: 0.5 !important;
+  stroke: crimson;
+  stroke-width: 1500px;
 }
 #map #svg2 {
   height: 600px;
