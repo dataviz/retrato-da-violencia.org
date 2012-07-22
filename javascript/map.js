@@ -22,8 +22,10 @@ Map = (function ($) {
   }
 
   function _toggleActive() {
+    var d3Element = d3.select(this);
+
     d3.selectAll('path.str4').classed('active', false);
-    d3.select(this).classed('active', true);
+    d3Element.classed('active', true);
 
     _showInfo(d3Element.attr('id').replace(/.*_/, ''));
   };
