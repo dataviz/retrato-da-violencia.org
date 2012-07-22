@@ -7,8 +7,6 @@ body {
 }
 .header {
   border-top: 4px solid crimson;
-}
-.header p {
   padding: .5em 2em;
   font-size: 3em;
 }
@@ -23,12 +21,15 @@ body {
   right: 40px;
   width: 310px;
 }
-#info:after {
+#info p:last-child:after {
   content: ' ';
   display: block;
-  width: 500px;
+  width: 150px;
   border-bottom: 1px solid crimson;
-  -webkit-transform: rotate(45deg);
+  -webkit-transform: rotate(-15deg);
+  margin-left: -146px;
+  margin-top: 35px;
+  position: absolute;
 }
 #map {
   width: 600px;
