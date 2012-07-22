@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffe url(../images/background-texture.png) repeat scroll left top;
+  font-size: 100%;
+  font-family: Rokkitt, Georgia, serif;
+}
+.header {
+  border-top: 4px solid crimson;
+}
+.header p {
+  padding: .5em 2em;
+  font-size: 3em;
+}
+.main {
+  position: relative;
+}
+#info {
+  position: absolute;
+  font-size: .7em;
+  margin: 0 4em;
+  top: 40px;
+  right: 40px;
+  width: 310px;
+}
+#info:after {
+  content: ' ';
+  display: block;
+  width: 500px;
+  border-bottom: 1px solid crimson;
+  -webkit-transform: rotate(45deg);
+}
+#map {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+}
+#info h3 {
+  color: crimson;
+  font-size: 2em;
+  border-bottom: 3px solid crimson;
+}
+#info p {
+  font-size: 1.5em;
+  line-height: 2em;
+  color: #777;
+}
+#info p:last-child {
+  padding-bottom: 1em;
+  border-bottom: 1px solid crimson;
+}
+#info p em {
+  color: #333;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 4em;
+  display: block;
+  color: crimson;
+}
+
+/* SVG STYLING */
+#map #svg2 {
+  height: 600px;
+  width: 600px;
+}
+path.fil4 {
+  fill: crimson;
+  fill-opacity: 0;
+}
+path.active {
+  fill-opacity: .5;
+  stroke-opacity: .5;
+  stroke: crimson;
+  stroke-width: 1500px;
+}

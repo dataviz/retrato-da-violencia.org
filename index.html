@@ -1,17 +1,24 @@
 <!doctype html>
-<html lang='pt-br'>
+<html lang="pt-br">
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Retrato da Violência</title>
-    <link rel='stylesheet' href='stylesheets/style.css'>
-    <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rokkitt:400,700">
+    <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
-    <div class='top-bar'></div>
-    <div id='map'></div> 
-    <div id='info'></div>
-    <script src='javascript/libs/d3.v2.min.js'></script>
-    <script src='javascript/libs/zepto.min.js'></script>
-    <script src='javascript/map.js'></script>
+    <div class="header">
+      <p>Retrato da violência contra a mulher no estado do Rio Grande do Sul no período entre janeiro e julho de 2012. Ajude a reverter esse quadro! Divulgue qualquer tipo de violência contra a mulher. 0800 000 0000</p>
+    </div>
+    <div class="main">
+      <div id="info"></div>
+      <div id="map"></div>
+    </div>
+    <script src="javascript/libs/zepto.min.js"></script>
+    <script src="javascript/libs/d3.v2.min.js"></script>
+    <script src="javascript/map.js"></script>
+    <!-- #TODO ANALYTICS -->
   </body>
 </html>
