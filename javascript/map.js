@@ -12,8 +12,7 @@ Map = (function ($) {
 
   function _setupMunicipios() {
     d3.selectAll('path.str4')
-      .on('mouseover', _toggleActive)
-      .on('mouseout', _toggleActive);
+      .on('mouseover', _toggleActive);
   };
 
   function _loadEstupros() {
@@ -23,10 +22,9 @@ Map = (function ($) {
   }
 
   function _toggleActive() {
-    var d3Element = d3.select(this),
-    currentState = d3Element.classed('active');
+    d3.selectAll('path.str4').classed('active', false);
+    d3.select(this).classed('active', true);
 
-    d3Element.classed('active', !currentState);
     _showInfo(d3Element.attr('id').replace(/.*_/, ''));
   };
 
