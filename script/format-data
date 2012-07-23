@@ -2,6 +2,7 @@
 require 'csv'
 require 'json'
 
+
 CODIGO_IBGE = Hash[CSV.read('data/municipios_rs.csv').to_a[1..-1].map { |x| x[0..-3] }]
 MESOREGIOES = {
     4301 => "Noroeste Rio-Grandense",
@@ -13,27 +14,55 @@ MESOREGIOES = {
     4307 => "Sudeste Rio-Grandense"
 }
 ESTUPROS = CSV.read('data/estupros_mulheres_dados_abertos.csv', :col_sep => ';')[1..-1]
+POPULACAO = CSV.read('data/populacao.csv', :col_sep => ',')[1..-1]
+
+pop_por_regiao = {}
+POPULACAO.each do |pop| 
+  codigo = CODIGO_IBGE[pop.first]
+  pop_por_regiao[codigo] ||= 0
+  pop_por_regiao[codigo] += pop.last.to_i
+end
 
 results = {}
+
 ESTUPROS.each do |estupro|
   municipio, ano, mes, dia, dia_da_semana, turno, hora, tentado, local, idade_vitima, idade_autor = *estupro
 
   next if (idade_vitima.to_i.zero? || idade_autor.to_i.zero?)
 
   municipio = $1 if municipio =~ /\((.*)\)/
+
+  populacao = 0
+
+  POPULACAO.each do |pop|
+    if pop.first == municipio
+      populacao = pop.last
+    end
+  end
+
   codigo = CODIGO_IBGE[municipio]
   results[codigo] ||= []
-  results[codigo] << [municipio, turno, local, idade_vitima.to_i, idade_autor.to_i]
+  results[codigo] << [municipio, turno, local, idade_vitima.to_i, idade_autor.to_i, populacao.to_i]
 end
+
 
 resultado = {}
 results.each_pair do |codigo, estupros|
+
+
+  puts estupros.map { |estupro| estupro[5] }.inject(:+)
+  
+
   media_idade_vitima = estupros.map { |estupro| estupro[3] }.inject(:+) / estupros.length
   media_idade_autor = estupros.map { |estupro| estupro[4] }.inject(:+) / estupros.length
   resultado[codigo] = { :nome => MESOREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
-                        :ocorrencias => estupros.length }
+                        :ocorrencias => estupros.length,
+                        :populacao => pop_por_regiao[codigo]}                    
 end
 
-puts resultado.to_json
+File.open("data/dados_estupros.json","w") do |f|
+  f.write(resultado.to_json)
+end
+
