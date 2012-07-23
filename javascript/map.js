@@ -37,7 +37,8 @@ Map = (function ($) {
     var media_vitima    = "<p class='victim'>Média de idade das vítimas: <br><em>"+municipio.media_idade_vitima+"</em></p>";
     var media_autor     = "<p class='author'>Média de idade dos autores: <br><em>"+municipio.media_idade_autor+"</em></p>";
     var ocorrencias     = "<p>Número de ocorrências na região: <br><em>"+municipio.ocorrencias+"</em></p>";
-    $('#info').html(nome_municipio + media_vitima + media_autor + ocorrencias);
+    var populacao       = "<p>População  na região: <br><em>"+municipio.populacao+"</em></p>";
+    $('#info').html(nome_municipio + media_vitima + media_autor + ocorrencias + populacao);
   }
 
   return {
