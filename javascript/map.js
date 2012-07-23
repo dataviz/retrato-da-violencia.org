@@ -8,7 +8,7 @@ Map = (function ($) {
       _setupMunicipios();
       _loadEstupros();
     });
-  }
+  };
 
   function _setupMunicipios() {
     d3.selectAll('path.str4')
@@ -19,7 +19,7 @@ Map = (function ($) {
     $.getJSON('data/dados_estupros.json', function (data) {
       Estupros = data;
     });
-  }
+  };
 
   function _toggleActive() {
     var d3Element = d3.select(this);
@@ -37,9 +37,13 @@ Map = (function ($) {
     var media_vitima    = "<p class='victim'>Média de idade das vítimas: <br><em>"+municipio.media_idade_vitima+"</em></p>";
     var media_autor     = "<p class='author'>Média de idade dos autores: <br><em>"+municipio.media_idade_autor+"</em></p>";
     var ocorrencias     = "<p>Número de ocorrências na região: <br><em>"+municipio.ocorrencias+"</em></p>";
-    var populacao       = "<p>População  na região: <br><em>"+municipio.populacao+"</em></p>";
+    var populacao       = "<p>População na região: <br><em>"+_formatNumber(municipio.populacao)+"</em></p>";
     $('#info').html(nome_municipio + media_vitima + media_autor + ocorrencias + populacao);
-  }
+  };
+
+  function _formatNumber(number) {
+      return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+  };
 
   return {
     'initialize': initialize
