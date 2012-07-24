@@ -32,6 +32,7 @@ ESTUPROS.each do |estupro|
 
   municipio = $1 if municipio =~ /\((.*)\)/
   consumado = (consumado == 'Consumado')
+  pela_manha = (turno =~ /(Manh|Tarde)/)
 
   populacao = 0
   POPULACAO.each do |pop|
@@ -48,6 +49,7 @@ ESTUPROS.each do |estupro|
                        :consumado => consumado,
                        :idade_vitima => idade_vitima.to_i,
                        :idade_autor => idade_autor.to_i,
+                       :pela_manha => pela_manha,
                        :populacao => populacao.to_i }
 end
 
@@ -57,11 +59,13 @@ results.each_pair do |codigo, estupros|
   media_idade_vitima = estupros.map { |estupro| estupro[:idade_vitima] }.inject(:+) / estupros.length
   media_idade_autor = estupros.map { |estupro| estupro[:idade_autor] }.inject(:+) / estupros.length
   consumados = estupros.select { |estupro| estupro[:consumado] }.length
+  pela_manha = estupros.select { |estupro| estupro[:pela_manha] }.length
 
   resultado[codigo] = { :nome => MESOREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
                         :consumado => consumados,
+                        :pela_manha => pela_manha,
                         :ocorrencias => estupros.length,
                         :populacao => pop_por_regiao[codigo] }
 end
