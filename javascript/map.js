@@ -7,14 +7,18 @@ Map = (function ($) {
     d3.xml(svgPath, 'image/svg+xml', function (xml) {
       element.html(xml.documentElement);
 
-      _setupMunicipios();
+      _setupCallbacks();
       _loadEstupros();
     });
   };
 
-  function _setupMesoregioes() {
+  function _setupCallbacks() {
     d3.selectAll('path.str4')
-      .on('mouseover', _toggleActive)
+      .on('mouseover', function () { if (!zoomedInto) { _toggleActive.call(this); }})
+      .on('click', _zoom);
+
+    d3.selectAll('path.str3')
+      .on('mouseover', function () { if (zoomedInto) { _toggleActive.call(this); }})
       .on('click', _zoom);
   };
 
@@ -43,16 +47,19 @@ Map = (function ($) {
     if (zoomedInto === this) {
       viewBox = _noZoomViewBox(svg, zoomScale);
       zoomedInto = undefined;
+      d3.selectAll('path.inactive').classed('inactive', false);
     } else {
       if (zoomedInto) {
         viewBox = _centeredViewBox(element, svg, zoomScale);
       } else {
         viewBox = _centeredViewBoxWithZoom(element, svg, zoomScale);
       }
+      d3.selectAll('path.str4').classed('inactive', true);
       zoomedInto = this;
     }
 
     d3.select(svg).transition().attr('viewBox', viewBox);
+    d3.select('path.active').classed('active', false);
   }
 
   function _noZoomViewBox(svg) {
