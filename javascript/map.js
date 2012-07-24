@@ -1,5 +1,7 @@
 Map = (function ($) {
   var Estupros = {};
+  var zoomScale = 2;
+  var zoomedInto = undefined;
 
   function initialize(element, svgPath) {
     d3.xml(svgPath, 'image/svg+xml', function (xml) {
@@ -12,7 +14,8 @@ Map = (function ($) {
 
   function _setupMunicipios() {
     d3.selectAll('path.str4')
-      .on('mouseover', _toggleActive);
+      .on('mouseover', _toggleActive)
+      .on('click', _zoom);
   };
 
   function _loadEstupros() {
@@ -28,6 +31,65 @@ Map = (function ($) {
     d3Element.classed('active', true);
 
     _showInfo(d3Element.attr('id').replace(/.*_/, ''));
+  };
+
+  function _zoom() {
+    var id = d3.select(this).attr('id'),
+        element = document.getElementById(id),
+        svgId = d3.select('svg').attr('id'),
+        svg = document.getElementById(svgId),
+        viewBox;
+
+    if (zoomedInto === this) {
+      viewBox = _noZoomViewBox(svg, zoomScale);
+      zoomedInto = undefined;
+    } else {
+      if (zoomedInto) {
+        viewBox = _centeredViewBox(element, svg, zoomScale);
+      } else {
+        viewBox = _centeredViewBoxWithZoom(element, svg, zoomScale);
+      }
+      zoomedInto = this;
+    }
+
+    d3.select(svg).transition().attr('viewBox', viewBox);
+  }
+
+  function _noZoomViewBox(svg) {
+    var viewBox = d3.select(svg).attr('viewBox').split(' ');
+
+    viewBox[0] = viewBox[1] = 0;
+    viewBox[2] *= zoomScale;
+    viewBox[3] *= zoomScale;
+
+    return viewBox.join(' ');
+  }
+
+  function _centeredViewBoxWithZoom(element, svg) {
+    var viewBox = _centeredViewBox(element, svg).split(' ');
+
+    viewBox[2] /= zoomScale;
+    viewBox[3] /= zoomScale;
+
+    return viewBox.join(' ');
+  }
+
+  function _centeredViewBox(element, svg) {
+    var elementMiddle = _getMiddlePoint(element),
+        svgMiddle = _getMiddlePoint(svg),
+        viewBox = d3.select(svg).attr('viewBox').split(' ');
+
+    viewBox[0] = (elementMiddle.x - svgMiddle.x/zoomScale);
+    viewBox[1] = (elementMiddle.y - svgMiddle.y/zoomScale);
+
+    return viewBox.join(' ');
+  }
+
+  function _getMiddlePoint(element) {
+    var bbox = element.getBBox();
+
+    return { x: bbox.x + bbox.width/2,
+             y: bbox.y + bbox.height/2 };
   };
 
   function _showInfo(codigo) {
