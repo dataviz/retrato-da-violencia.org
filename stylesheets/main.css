@@ -51,11 +51,15 @@ body {
   color: crimson;
 }
 #map {
-  background: rgba(255,255,255,.3);
+  background: white;
   border: 6px solid white;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+}
+#map .loading {
+  margin: 200px auto;
+  display: block;
 }
 
 /* SVG STYLING */
