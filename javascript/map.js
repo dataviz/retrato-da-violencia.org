@@ -12,7 +12,7 @@ Map = (function ($) {
     });
   };
 
-  function _setupMunicipios() {
+  function _setupMesoregioes() {
     d3.selectAll('path.str4')
       .on('mouseover', _toggleActive)
       .on('click', _zoom);
