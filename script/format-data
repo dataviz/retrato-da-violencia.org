@@ -24,6 +24,10 @@ POPULACAO.each do |pop|
 end
 
 results = {}
+dias_da_semana = {}
+dias_do_mes = {}
+meses = {}
+anos = {}
 
 ESTUPROS.each do |estupro|
   municipio, ano, mes, dia, dia_da_semana, turno, hora, consumado, local, idade_vitima, idade_autor = *estupro
@@ -40,6 +44,12 @@ ESTUPROS.each do |estupro|
       populacao = pop.last
     end
   end
+
+  anos[ano] = (anos[ano] || 0) + 1
+  dias_da_semana[dia_da_semana] = (dias_da_semana[dia_da_semana] || 0) + 1
+  meses[mes] = (meses[mes] || 0) + 1
+  dias_do_mes[dia] = (dias_do_mes[dia] || 0) + 1
+
 
   codigo = CODIGO_IBGE[municipio]
   results[codigo] ||= []
@@ -69,6 +79,12 @@ results.each_pair do |codigo, estupros|
                         :ocorrencias => estupros.length,
                         :populacao => pop_por_regiao[codigo] }
 end
+
+resultado['anos'] = anos
+resultado['meses'] = meses
+resultado['dias'] = dias
+resultado['dias_do_mes'] = dias_do_mes
+resultado["dias_da_semana"] = dias_da_semana
 
 File.open("data/dados_estupros.json","w") do |f|
   f.write(resultado.to_json)
