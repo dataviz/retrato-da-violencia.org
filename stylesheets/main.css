@@ -58,6 +58,13 @@ body {
   display: block;
   color: crimson;
 }
+#map {
+  background: rgba(255,255,255,.3);
+  border: 6px solid white;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
 
 /* SVG STYLING */
 #map #svg2 {
