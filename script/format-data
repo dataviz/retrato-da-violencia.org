@@ -26,14 +26,14 @@ end
 results = {}
 
 ESTUPROS.each do |estupro|
-  municipio, ano, mes, dia, dia_da_semana, turno, hora, tentado, local, idade_vitima, idade_autor = *estupro
+  municipio, ano, mes, dia, dia_da_semana, turno, hora, consumado, local, idade_vitima, idade_autor = *estupro
 
   next if (idade_vitima.to_i.zero? || idade_autor.to_i.zero?)
 
   municipio = $1 if municipio =~ /\((.*)\)/
+  consumado = (consumado == 'Consumado')
 
   populacao = 0
-
   POPULACAO.each do |pop|
     if pop.first == municipio
       populacao = pop.last
@@ -42,24 +42,28 @@ ESTUPROS.each do |estupro|
 
   codigo = CODIGO_IBGE[municipio]
   results[codigo] ||= []
-  results[codigo] << [municipio, turno, local, idade_vitima.to_i, idade_autor.to_i, populacao.to_i]
+  results[codigo] << { :municipio => municipio, 
+                       :turno => turno,
+                       :local => local,
+                       :consumado => consumado,
+                       :idade_vitima => idade_vitima.to_i,
+                       :idade_autor => idade_autor.to_i,
+                       :populacao => populacao.to_i }
 end
 
 
 resultado = {}
 results.each_pair do |codigo, estupros|
+  media_idade_vitima = estupros.map { |estupro| estupro[:idade_vitima] }.inject(:+) / estupros.length
+  media_idade_autor = estupros.map { |estupro| estupro[:idade_autor] }.inject(:+) / estupros.length
+  consumados = estupros.select { |estupro| estupro[:consumado] }.length
 
-
-  puts estupros.map { |estupro| estupro[5] }.inject(:+)
-  
-
-  media_idade_vitima = estupros.map { |estupro| estupro[3] }.inject(:+) / estupros.length
-  media_idade_autor = estupros.map { |estupro| estupro[4] }.inject(:+) / estupros.length
   resultado[codigo] = { :nome => MESOREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
+                        :consumado => consumados,
                         :ocorrencias => estupros.length,
-                        :populacao => pop_por_regiao[codigo]}                    
+                        :populacao => pop_por_regiao[codigo] }
 end
 
 File.open("data/dados_estupros.json","w") do |f|
