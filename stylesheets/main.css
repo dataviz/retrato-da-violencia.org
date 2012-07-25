@@ -43,9 +43,8 @@ body {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.bar-graph .meter:hover {
-  border-color: black;
-  opacity: 1;
+.hover span {
+  opacity: 1 !important;
 }
 #info {
   position: absolute;

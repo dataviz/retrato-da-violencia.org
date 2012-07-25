@@ -115,6 +115,7 @@ max = resultado.map { |estupro| estupro[1][:ocorrencias] / estupro[1][:populacao
 resultado.each_pair do |codigo, res|
   ocorrencias_por_populacao = res[:ocorrencias] / res[:populacao].to_f
   resultado[codigo][:opacity] = ocorrencias_por_populacao / max
+  resultado[codigo][:proporcao] = (ocorrencias_por_populacao * 100000).to_i
 end
 
 File.open("data/dados_estupros.json","w") do |f|
