@@ -96,19 +96,19 @@ body {
   height: 600px;
   width: 600px;
 }
-path.fil4 {
+path.str3 {
   fill: crimson;
   fill-opacity: 0;
+}
+path.hover {
+  stroke-opacity: .5;
+  stroke: crimson;
+  stroke-width: 1500px;
   cursor: pointer;
 }
 path.active {
   fill-opacity: .5;
-  stroke-opacity: .5;
-  stroke: crimson;
-  stroke-width: 1500px;
-}
-path.str4 {
-  fill: none;
+  cursor: default;
 }
 /* icons */
 .icons-wrapper {

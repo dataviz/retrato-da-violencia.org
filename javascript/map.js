@@ -15,16 +15,23 @@ Map = (function ($) {
 
   function _setupCallbacks() {
     d3.selectAll('path.str3')
-      .on('mouseover', _toggleActive);
+      .on('mouseover', _hover)
+      .on('click', _selectRegion);
   };
 
-  function _toggleActive() {
-    var d3Element = d3.select(this),
-        id = d3Element.attr('id');
+  function _hover() {
+    _classOnlyThisPathAs(this, 'hover');
+  };
 
-    d3.select('path.active').classed('active', false);
-    d3Element.classed('active', true);
+  function _classOnlyThisPathAs(path, className) {
+    d3.select('path.'+className).classed(className, false);
+    d3.select(path).classed(className, true);
+  };
 
+  function _selectRegion() {
+    var id = d3.select(this).attr('id');
+
+    _classOnlyThisPathAs(this, 'active');
     _showInfo(id.replace(/.*_/, ''));
     window.location.hash = id;
   };
@@ -52,13 +59,12 @@ Map = (function ($) {
   };
 
   function _focusInto(id) {
-    var element = document.getElementById(id),
-        d3Element = d3.select(element);
+    var element = document.getElementById(id);
 
     if (!element) { return; }
 
-    d3Element.on('mouseover').call(element);
-  }
+    d3.select(element).on('click').call(element);
+  };
 
   return {
     'initialize': initialize
