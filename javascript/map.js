@@ -10,6 +10,7 @@ Map = (function ($) {
         var focusedElementId = window.location.hash.replace('#', '');
         _focusInto(focusedElementId);
         _colorRegions();
+        _drawBars();
       });
     });
   };
@@ -73,6 +74,35 @@ Map = (function ($) {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
           return 'fill-opacity: '+Estupros[id].opacity;
       });
+  }
+
+  function _drawBars() {
+    d3.select('.bar-graph').append('ul').selectAll('li')
+      .data(Object.keys(Estupros)).enter().append('li')
+      .html(_barInfo)
+      .on('mouseover', _mouseOverRegion)
+      .on('click', _clickRegion);
+  };
+
+  function _barInfo(id) {
+    var regiao = Estupros[id],
+        nome = "<b>"+regiao.nome+"</b>",
+        meter = "<span class='meter' style='width: "+regiao.opacity*100+"%'></span>";
+
+    return "<li>"+nome+meter+"</li>";
+  }
+
+  function _mouseOverRegion(id) {
+    _sendEventToRegion(id, 'mouseover');
+  }
+
+  function _clickRegion(id) {
+    _sendEventToRegion(id, 'click');
+  }
+
+  function _sendEventToRegion(id, eventName) {
+    var region = document.getElementById('micro_'+id);
+    d3.select(region).on(eventName).call(region);
   }
 
   return {
