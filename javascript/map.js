@@ -39,14 +39,20 @@ Map = (function ($) {
   };
 
   function _showInfo(codigo) {
-    var regiao       = Estupros[codigo];
+    var regiao = Estupros[codigo];
     if (!regiao) { return; }
-    var nome_regiao     = "<h3>"+regiao.nome+"</h3>";
-    var media_vitima    = "<p class='victim'>Média de idade das vítimas: <br><em>"+regiao.media_idade_vitima+"</em></p>";
-    var media_autor     = "<p class='author'>Média de idade dos autores: <br><em>"+regiao.media_idade_autor+"</em></p>";
-    var ocorrencias     = "<p>Número de ocorrências na região: <br><em>"+_formatNumber(regiao.ocorrencias)+"</em></p>";
-    var populacao       = "<p>População na região: <br><em>"+_formatNumber(regiao.populacao)+"</em></p>";
-    $('#info-s').html(nome_regiao + media_vitima + media_autor + ocorrencias + populacao);
+
+    var day = Math.round(100 * regiao.pela_manha / regiao.ocorrencias),
+        night = 100 - day,
+        ranking = _keysSortedByOpacity().indexOf(codigo) + 1;
+
+    $('#info h3').text(regiao.nome);
+    $('.population em').text(_formatNumber(regiao.populacao));
+    $('.victim em').text(regiao.media_idade_vitima);
+    $('.author em').text(regiao.media_idade_autor);
+    $('.night em').text(night+'%');
+    $('.day em').text(day+'%');
+    $('.ranking em').text(ranking+'ª');
   };
 
   function _formatNumber(number) {
