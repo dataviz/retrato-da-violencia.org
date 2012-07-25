@@ -8,7 +8,10 @@ Map = (function ($) {
       element.html(xml.documentElement);
 
       _setupCallbacks();
-      _loadEstupros();
+      _loadEstupros(function () {
+        var focusedElementId = window.location.hash.replace('#', '');
+        _focusInto(focusedElementId);
+      });
     });
   };
 
@@ -22,19 +25,32 @@ Map = (function ($) {
       .on('click', _zoom);
   };
 
-  function _loadEstupros() {
+  function _loadEstupros(callback) {
     $.getJSON('data/dados_estupros.json', function (data) {
       Estupros = data;
+      callback();
     });
   };
 
+  function _focusInto(id) {
+    var element = document.getElementById(id),
+        d3Element = d3.select(element);
+
+    if (!element) { return; }
+
+    d3Element.on('click').call(element);
+    d3Element.on('mouseover').call(element);
+  }
+
   function _toggleActive() {
-    var d3Element = d3.select(this);
+    var d3Element = d3.select(this),
+        id = d3Element.attr('id');
 
     d3.select('path.active').classed('active', false);
     d3Element.classed('active', true);
 
-    _showInfo(d3Element.attr('id').replace(/.*_/, ''));
+    _showInfo(id.replace(/.*_/, ''));
+    window.location.hash = id;
   };
 
   function _zoom() {
