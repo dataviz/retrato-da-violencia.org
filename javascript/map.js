@@ -9,6 +9,7 @@ Map = (function ($) {
       _loadEstupros(function () {
         var focusedElementId = window.location.hash.replace('#', '');
         _focusInto(focusedElementId);
+        _colorRegions();
       });
     });
   };
@@ -65,6 +66,14 @@ Map = (function ($) {
 
     d3.select(element).on('click').call(element);
   };
+
+  function _colorRegions() {
+    d3.selectAll('path.str3')
+      .attr('style', function () {
+          var id = d3.select(this).attr('id').replace(/.*_/, '');
+          return 'fill-opacity: '+Estupros[id].opacity;
+      });
+  }
 
   return {
     'initialize': initialize
