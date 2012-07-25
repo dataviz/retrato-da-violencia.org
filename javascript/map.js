@@ -88,7 +88,7 @@ Map = (function ($) {
     var sortedKeys = Object.keys(Estupros);
 
     sortedKeys.sort(function (a, b) {
-      return parseFloat(Estupros[a].opacity) - parseFloat(Estupros[b].opacity)
+      return parseFloat(Estupros[b].opacity) - parseFloat(Estupros[a].opacity)
     });
 
     return sortedKeys;
