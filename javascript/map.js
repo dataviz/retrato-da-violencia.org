@@ -109,11 +109,10 @@ Map = (function ($) {
 
   function _barInfo(id) {
     var regiao = Estupros[id],
-        nome = "<b>"+regiao.nome+"</b>",
-        meter = "<span class='meter' style='width: "+regiao.opacity*100+"%'></span>";
+        meter = "<span class='meter' style='width: "+regiao.opacity*100+"%'>"+regiao.nome+"</span>";
 
-    return nome+meter;
-  };
+    return meter;
+  }
 
   function _hoverBar(id) {
     _classOnlyThisAs('micro_'+id, 'hover');
