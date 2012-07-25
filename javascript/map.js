@@ -44,7 +44,7 @@ Map = (function ($) {
     var media_autor     = "<p class='author'>Média de idade dos autores: <br><em>"+regiao.media_idade_autor+"</em></p>";
     var ocorrencias     = "<p>Número de ocorrências na região: <br><em>"+_formatNumber(regiao.ocorrencias)+"</em></p>";
     var populacao       = "<p>População na região: <br><em>"+_formatNumber(regiao.populacao)+"</em></p>";
-    $('#info').html(nome_regiao + media_vitima + media_autor + ocorrencias + populacao);
+    $('#info-s').html(nome_regiao + media_vitima + media_autor + ocorrencias + populacao);
   };
 
   function _formatNumber(number) {

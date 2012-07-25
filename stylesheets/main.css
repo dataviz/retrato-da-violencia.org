@@ -39,6 +39,9 @@ body {
   cursor: pointer;
   border: 1px solid transparent;
   opacity: .8;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
 }
 .bar-graph .meter:hover {
   border-color: black;
@@ -48,6 +51,8 @@ body {
   position: absolute;
   font-size: .7em;
   margin: 0 4em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid crimson;
   top: 40px;
   right: 40px;
   width: 310px;
@@ -67,10 +72,6 @@ body {
   line-height: 2em;
   color: #777;
 }
-#info p:last-child {
-  padding-bottom: 1em;
-  border-bottom: 1px solid crimson;
-}
 #info p em {
   color: #333;
   font-weight: bold;
@@ -79,12 +80,16 @@ body {
   display: block;
   color: crimson;
 }
-#map {
-  background: white;
-  border: 6px solid white;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+#info .figures {
+  clear: both;
+  overflow: hidden;
+}
+#info .period p em {
+  display: inline-block;
+}
+#info .figures p {
+  float: left;
+  margin-right: 2em;
 }
 #map .loading {
   margin: 200px auto;
@@ -134,6 +139,7 @@ path.active {
 }
 .icon.victim {
   width: 51px;
+  margin-top: 20px;
   height: 106px;
   display: block;
   background-position: -155px -21px;
