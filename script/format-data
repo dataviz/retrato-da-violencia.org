@@ -117,11 +117,6 @@ resultado.each_pair do |codigo, res|
   resultado[codigo][:opacity] = ocorrencias_por_populacao / max
 end
 
-resultado['anos'] = anos
-resultado['meses'] = meses
-resultado['dias_do_mes'] = dias_do_mes
-resultado["dias_da_semana"] = dias_da_semana
-
 File.open("data/dados_estupros.json","w") do |f|
   f.write(resultado.to_json)
 end
