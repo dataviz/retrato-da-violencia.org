@@ -50,9 +50,9 @@ Map = (function ($) {
       d3.selectAll('path.inactive').classed('inactive', false);
     } else {
       if (zoomedInto) {
-        viewBox = _centeredViewBox(element, svg, zoomScale);
+        viewBox = _centeredViewBox(element, svg);
       } else {
-        viewBox = _centeredViewBoxWithZoom(element, svg, zoomScale);
+        viewBox = _centeredViewBoxWithZoom(element, svg);
       }
       d3.selectAll('path.str4').classed('inactive', true);
       zoomedInto = this;
@@ -100,14 +100,14 @@ Map = (function ($) {
   };
 
   function _showInfo(codigo) {
-    var municipio       = Estupros[codigo];
-    if (!municipio) { return; }
-    var nome_municipio  = "<h3>"+municipio.nome+"</h3>";
-    var media_vitima    = "<p class='victim'>Média de idade das vítimas: <br><em>"+municipio.media_idade_vitima+"</em></p>";
-    var media_autor     = "<p class='author'>Média de idade dos autores: <br><em>"+municipio.media_idade_autor+"</em></p>";
-    var ocorrencias     = "<p>Número de ocorrências na região: <br><em>"+_formatNumber(municipio.ocorrencias)+"</em></p>";
-    var populacao       = "<p>População na região: <br><em>"+_formatNumber(municipio.populacao)+"</em></p>";
-    $('#info').html(nome_municipio + media_vitima + media_autor + ocorrencias + populacao);
+    var regiao       = Estupros[codigo];
+    if (!regiao) { return; }
+    var nome_regiao     = "<h3>"+regiao.nome+"</h3>";
+    var media_vitima    = "<p class='victim'>Média de idade das vítimas: <br><em>"+regiao.media_idade_vitima+"</em></p>";
+    var media_autor     = "<p class='author'>Média de idade dos autores: <br><em>"+regiao.media_idade_autor+"</em></p>";
+    var ocorrencias     = "<p>Número de ocorrências na região: <br><em>"+_formatNumber(regiao.ocorrencias)+"</em></p>";
+    var populacao       = "<p>População na região: <br><em>"+_formatNumber(regiao.populacao)+"</em></p>";
+    $('#info').html(nome_regiao + media_vitima + media_autor + ocorrencias + populacao);
   };
 
   function _formatNumber(number) {
