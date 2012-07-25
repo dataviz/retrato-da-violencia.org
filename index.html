@@ -15,6 +15,16 @@
       <p>Ajude a reverter esse quadro reportando qualquer tipo de violência contra a mulher no telefone <strong>0800 000 0000</strong></p>
     </div>
     <div class="main">
+      <div class="bar-graph">
+        <ul>
+          <script>
+            var li;
+            for (li = 0; li < 20; li++) {
+              document.write('<li><b>Porto Alegre</b><span class="meter"></span></li>');
+            }
+          </script>
+        </ul>
+      </div>
       <p class="icons-wrapper">
         <i class="icon moon"></i>
         <i class="icon sun"></i>
@@ -29,6 +39,16 @@
     <script src="javascript/libs/zepto.min.js"></script>
     <script src="javascript/libs/d3.v2.min.js"></script>
     <script src="javascript/map.js"></script>
+        <script>
+          $(function(){
+            $('.bar-graph .meter').each(function(i){
+              if (i == 0) {
+                i = .2
+              }
+              $(this).css('width', (i*5)+'%')
+            })
+          })
+        </script>
     <!-- #TODO ANALYTICS -->
   </body>
 </html>
