@@ -105,7 +105,6 @@ results.each_pair do |codigo, estupros|
   resultado[codigo] = { :nome => MICROREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
-                        :consumado => consumados,
                         :pela_manha => pela_manha,
                         :ocorrencias => estupros.length,
                         :populacao => pop_por_regiao[codigo] }
