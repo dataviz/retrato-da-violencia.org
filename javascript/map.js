@@ -44,7 +44,8 @@ Map = (function ($) {
 
     var day = Math.round(100 * regiao.pela_manha / regiao.ocorrencias),
         night = 100 - day,
-        ranking = _keysSortedByOpacity().indexOf(codigo) + 1;
+        ranking = _keysSortedByOpacity().indexOf(codigo) + 1,
+        proporcao = regiao.proporcao;
 
     $('#info h3').text(regiao.nome);
     $('.population em').text(_formatNumber(regiao.populacao));
@@ -53,6 +54,7 @@ Map = (function ($) {
     $('.night em').text(night+'%');
     $('.day em').text(day+'%');
     $('.ranking em').text(ranking+'ª');
+    $('.proporcao em').text(proporcao);
   };
 
   function _formatNumber(number) {
