@@ -4,16 +4,6 @@ require 'csv'
 require 'json'
 
 
-CODIGO_IBGE_MESOREGIOES = Hash[CSV.read('data/municipios_rs.csv').to_a[1..-1].map { |x| x[0..-3] }]
-MESOREGIOES = {
-  4301 => "Noroeste Rio-Grandense",
-  4302 => "Nordeste Rio-Grandense",
-  4303 => "Centro Ocidental Rio-Grandense",
-  4304 => "Centro Oriental Rio-Grandense",
-  4305 => "Metropolitana de Porto Alegre",
-  4306 => "Sudoeste Rio-Grandense",
-  4307 => "Sudeste Rio-Grandense"
-}
 CODIGO_IBGE_MICROREGIOES = Hash[CSV.read('data/municipios_rs.csv').to_a[1..-1].map { |x| [x[0], x[2]] }]
 MICROREGIOES = {
   430101 => "Microregião de Santa Rosa",
@@ -57,10 +47,6 @@ POPULACAO = CSV.read('data/populacao.csv', :col_sep => ',')[1..-1]
 
 pop_por_regiao = {}
 POPULACAO.each do |pop| 
-  codigo = CODIGO_IBGE_MESOREGIOES[pop.first]
-  pop_por_regiao[codigo] ||= 0
-  pop_por_regiao[codigo] += pop.last.to_i
-
   codigo = CODIGO_IBGE_MICROREGIOES[pop.first]
   pop_por_regiao[codigo] ||= 0
   pop_por_regiao[codigo] += pop.last.to_i
@@ -103,10 +89,6 @@ ESTUPROS.each do |estupro|
             :pela_manha => pela_manha,
             :populacao => populacao.to_i }
 
-  codigo_mesoregiao = CODIGO_IBGE_MESOREGIOES[municipio]
-  results[codigo_mesoregiao] ||= []
-  results[codigo_mesoregiao] << dados
-
   codigo_microregiao = CODIGO_IBGE_MICROREGIOES[municipio]
   results[codigo_microregiao] ||= []
   results[codigo_microregiao] << dados
@@ -120,7 +102,7 @@ results.each_pair do |codigo, estupros|
   consumados = estupros.select { |estupro| estupro[:consumado] }.length
   pela_manha = estupros.select { |estupro| estupro[:pela_manha] }.length
 
-  resultado[codigo] = { :nome => MESOREGIOES[codigo.to_i] || MICROREGIOES[codigo.to_i],
+  resultado[codigo] = { :nome => MICROREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
                         :consumado => consumados,

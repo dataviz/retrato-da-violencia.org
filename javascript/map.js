@@ -1,7 +1,5 @@
 Map = (function ($) {
   var Estupros = {};
-  var zoomScale = 2;
-  var zoomedInto = undefined;
 
   function initialize(element, svgPath) {
     d3.xml(svgPath, 'image/svg+xml', function (xml) {
@@ -16,13 +14,8 @@ Map = (function ($) {
   };
 
   function _setupCallbacks() {
-    d3.selectAll('path.str4')
-      .on('mouseover', function () { if (!zoomedInto) { _toggleActive.call(this); }})
-      .on('click', _zoom);
-
     d3.selectAll('path.str3')
-      .on('mouseover', function () { if (zoomedInto) { _toggleActive.call(this); }})
-      .on('click', _zoom);
+      .on('mouseover', _toggleActive);
   };
 
   function _loadEstupros(callback) {
@@ -38,7 +31,6 @@ Map = (function ($) {
 
     if (!element) { return; }
 
-    d3Element.on('click').call(element);
     d3Element.on('mouseover').call(element);
   }
 
@@ -51,68 +43,6 @@ Map = (function ($) {
 
     _showInfo(id.replace(/.*_/, ''));
     window.location.hash = id;
-  };
-
-  function _zoom() {
-    var id = d3.select(this).attr('id'),
-        element = document.getElementById(id),
-        svgId = d3.select('svg').attr('id'),
-        svg = document.getElementById(svgId),
-        viewBox;
-
-    if (zoomedInto === this) {
-      viewBox = _noZoomViewBox(svg, zoomScale);
-      zoomedInto = undefined;
-      d3.selectAll('path.inactive').classed('inactive', false);
-    } else {
-      if (zoomedInto) {
-        viewBox = _centeredViewBox(element, svg);
-      } else {
-        viewBox = _centeredViewBoxWithZoom(element, svg);
-      }
-      d3.selectAll('path.str4').classed('inactive', true);
-      zoomedInto = this;
-    }
-
-    d3.select(svg).transition().attr('viewBox', viewBox);
-    d3.select('path.active').classed('active', false);
-  }
-
-  function _noZoomViewBox(svg) {
-    var viewBox = d3.select(svg).attr('viewBox').split(' ');
-
-    viewBox[0] = viewBox[1] = 0;
-    viewBox[2] *= zoomScale;
-    viewBox[3] *= zoomScale;
-
-    return viewBox.join(' ');
-  }
-
-  function _centeredViewBoxWithZoom(element, svg) {
-    var viewBox = _centeredViewBox(element, svg).split(' ');
-
-    viewBox[2] /= zoomScale;
-    viewBox[3] /= zoomScale;
-
-    return viewBox.join(' ');
-  }
-
-  function _centeredViewBox(element, svg) {
-    var elementMiddle = _getMiddlePoint(element),
-        svgMiddle = _getMiddlePoint(svg),
-        viewBox = d3.select(svg).attr('viewBox').split(' ');
-
-    viewBox[0] = (elementMiddle.x - svgMiddle.x/zoomScale);
-    viewBox[1] = (elementMiddle.y - svgMiddle.y/zoomScale);
-
-    return viewBox.join(' ');
-  }
-
-  function _getMiddlePoint(element) {
-    var bbox = element.getBBox();
-
-    return { x: bbox.x + bbox.width/2,
-             y: bbox.y + bbox.height/2 };
   };
 
   function _showInfo(codigo) {
