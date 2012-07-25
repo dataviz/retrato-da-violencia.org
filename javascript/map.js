@@ -18,22 +18,6 @@ Map = (function ($) {
       .on('mouseover', _toggleActive);
   };
 
-  function _loadEstupros(callback) {
-    $.getJSON('data/dados_estupros.json', function (data) {
-      Estupros = data;
-      callback();
-    });
-  };
-
-  function _focusInto(id) {
-    var element = document.getElementById(id),
-        d3Element = d3.select(element);
-
-    if (!element) { return; }
-
-    d3Element.on('mouseover').call(element);
-  }
-
   function _toggleActive() {
     var d3Element = d3.select(this),
         id = d3Element.attr('id');
@@ -59,6 +43,22 @@ Map = (function ($) {
   function _formatNumber(number) {
       return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
   };
+
+  function _loadEstupros(callback) {
+    $.getJSON('data/dados_estupros.json', function (data) {
+      Estupros = data;
+      callback();
+    });
+  };
+
+  function _focusInto(id) {
+    var element = document.getElementById(id),
+        d3Element = d3.select(element);
+
+    if (!element) { return; }
+
+    d3Element.on('mouseover').call(element);
+  }
 
   return {
     'initialize': initialize
