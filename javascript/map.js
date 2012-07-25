@@ -78,18 +78,28 @@ Map = (function ($) {
 
   function _drawBars() {
     d3.select('.bar-graph').append('ul').selectAll('li')
-      .data(Object.keys(Estupros)).enter().append('li')
+      .data(_keysSortedByOpacity()).enter().append('li')
       .html(_barInfo)
       .on('mouseover', _mouseOverRegion)
       .on('click', _clickRegion);
   };
+
+  function _keysSortedByOpacity() {
+    var sortedKeys = Object.keys(Estupros);
+
+    sortedKeys.sort(function (a, b) {
+      return parseFloat(Estupros[a].opacity) - parseFloat(Estupros[b].opacity)
+    });
+
+    return sortedKeys;
+  }
 
   function _barInfo(id) {
     var regiao = Estupros[id],
         nome = "<b>"+regiao.nome+"</b>",
         meter = "<span class='meter' style='width: "+regiao.opacity*100+"%'></span>";
 
-    return "<li>"+nome+meter+"</li>";
+    return nome+meter;
   }
 
   function _mouseOverRegion(id) {
