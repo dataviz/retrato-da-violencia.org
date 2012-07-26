@@ -88,6 +88,7 @@ body {
 }
 .footer p {
   margin: 0 auto;
+  text-align: center;
 }
 .footer .facebook {
   width: 450px;
