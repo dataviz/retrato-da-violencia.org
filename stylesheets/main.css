@@ -108,11 +108,14 @@ h3 {
   clear: both;
   overflow: hidden;
 }
+#info .age p,
 #info .period p em {
   display: inline-block;
 }
+#info .period p {
+  display: block;
+}
 #info .figures p {
-  float: left;
   margin-right: 2em;
 }
 #map .loading {
@@ -155,6 +158,12 @@ path.active {
   height: 36px;
   display: inline-block;
 }
+.icon.victim,
+.icon.author {
+  width: 49px;
+  height: 49px;
+  display: block;
+}
 .icon.sun {
   background-position: -72px 0;
 }
@@ -162,16 +171,10 @@ path.active {
   background-position: 0 0;
 }
 .icon.victim {
-  width: 58px;
-  height: 125px;
-  display: block;
-  background-position: -150px 0;
+  background-position: -149px 0;
 }
 .icon.author {
-  width: 48px;
-  height: 126px;
-  display: block;
-  background-position: -216px 0;
+  background-position: -249px 0;
 }
 
 /* DASHBOARD */
