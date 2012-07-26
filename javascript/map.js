@@ -8,10 +8,12 @@ Map = (function ($) {
 
       _setupCallbacks();
       _loadEstupros(function () {
-        var focusedElementId = window.location.hash.replace('#', '');
-        _focusInto(focusedElementId);
-        _colorRegions();
+        var focusedElementSlug = window.location.hash.replace('#', '');
+        // Use Soledade as default
+        if (focusedElementSlug == '') { focusedElementSlug = 'soledade'; };
+        _focusInto(focusedElementSlug);
         _drawBars();
+        _colorRegions();
       });
     });
   };
@@ -32,12 +34,13 @@ Map = (function ($) {
   };
 
   function _selectRegion() {
-    var id = this.id;
+    var id = this.id,
+        codigo = id.replace(/.*_/, '');
 
     _classOnlyThisAs(id, 'active');
-    _showInfo(id.replace(/.*_/, ''));
-    _draw_timeline(id);
-    window.location.hash = id;
+    _draw_timeline(codigo);
+    _showInfo(codigo);
+    window.location.hash = $.slug(Estupros[codigo].nome);
   };
 
   function _showInfo(codigo) {
@@ -73,8 +76,15 @@ Map = (function ($) {
     });
   };
 
-  function _focusInto(id) {
-    var element = document.getElementById(id);
+  function _focusInto(slug) {
+    var element;
+
+    for (id in Estupros) {
+      if ($.slug(Estupros[id].nome) == slug) {
+        element = document.getElementById('micro_'+id);
+        break;
+      }
+    }
 
     if (!element) { return; }
 
@@ -85,12 +95,17 @@ Map = (function ($) {
     d3.selectAll('path.str3')
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
-          return 'fill-opacity: '+Estupros[id].range / 5  ;
-
+          return 'fill-opacity: '+Estupros[id].range / 5;
       })
       .each(function () {
           var d3Element = d3.select(this);
           d3Element.classed(d3Element.attr('id'), true);
+      });
+
+    d3.selectAll('.bar-graph li')
+      .attr('style', function (id) {
+        var d3RegionMap = d3.select('path.'+this.classList[0]);
+        return d3RegionMap.attr('style').replace('fill-', '');
       });
   };
 
@@ -133,8 +148,7 @@ Map = (function ($) {
     d3.select(region).on(eventName).call(region);
   };
 
-  function _draw_timeline(id) {
-    var cod = id.replace(/.*_/, '');
+  function _draw_timeline(cod) {
     var regiao = Estupros[cod];
     var years = [];
     $.each(regiao.anos, function(i, v) {
@@ -146,8 +160,6 @@ Map = (function ($) {
       height: '40',
       barWidth: 20,
       barColor: '#dc143c'});
-    
-    //$("#info .timeline span").text(regiao.anos);
   };
 
   return {
