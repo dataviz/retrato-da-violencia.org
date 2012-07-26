@@ -80,7 +80,7 @@ Map = (function ($) {
     d3.selectAll('path.str3')
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
-          return 'fill-opacity: '+Estupros[id].opacity;
+          return 'fill-opacity: '+Estupros[id].range / 5  ;
       });
   }
 
