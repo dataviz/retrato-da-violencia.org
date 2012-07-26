@@ -22,6 +22,7 @@ body {
   position: relative;
 }
 .footer {
+  clear: both;
   background-color: crimson;
   color: white;
   padding: 1em 0;
@@ -67,10 +68,12 @@ body {
   text-shadow: rgba(0,0,0,.3) 0 -1px 0;
 }
 .bar-graph .meter:hover,
-.bar-graph .meter.active,
-.bar-graph .meter.hover {
+.bar-graph .hover .meter {
   border-color: black;
   background-color: rgb(220, 20, 60);
+}
+.bar-graph .active .meter {
+  border-color: crimson;
 }
 #info section {
   background: crimson;
@@ -89,38 +92,16 @@ h3 {
   font-size: 2em;
   margin: 0;
 }
+#info p {
+  margin: 0;
+  padding: .25em .5em;
+}
 #info p em {
   font-weight: bold;
   font-style: normal;
   font-size: 3em;
-  display: block;
-  color: white;
-}
-#info .region-data {
-  float: right;
-}
-#info .region-data em {
-  font-size: 1em;
-  color: black;
-  display: inline;
-}
-#info .figures {
-  clear: both;
-  overflow: hidden;
-}
-#info .age p,
-#info .period p em {
   display: inline-block;
-}
-#info .period p {
-  display: block;
-}
-#info .figures p {
-  margin-right: 2em;
-}
-#map .loading {
-  margin: 300px auto;
-  display: block;
+  color: white;
 }
 
 /* SVG STYLING */
@@ -164,6 +145,13 @@ path.active {
   height: 49px;
   display: block;
 }
+.icon.home,
+.icon.street,
+.icon.other {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+}
 .icon.sun {
   background-position: -72px 0;
 }
@@ -176,6 +164,15 @@ path.active {
 .icon.author {
   background-position: -249px 0;
 }
+.icon.home {
+  background-position: -450px 0;
+}
+.icon.street {
+  background-position: -396px 0;
+}
+.icon.other {
+  background-position: -350px 0;
+}
 
 /* DASHBOARD */
 #dashboard-header {
@@ -184,4 +181,30 @@ path.active {
 section.age .figures {
   width: 200px;
 }
-
+#info .region-data {
+  float: right;
+}
+#info .region-data em {
+  font-size: 1em;
+  color: black;
+  display: inline;
+}
+#info .figures {
+  clear: both;
+  overflow: hidden;
+}
+#info .age p,
+#info .period p em {
+  display: inline-block;
+}
+#info .ranking p,
+#info .period p {
+  display: block;
+}
+#info .figures p {
+  margin-right: .5em;
+}
+#map .loading {
+  margin: 300px auto;
+  display: block;
+}
