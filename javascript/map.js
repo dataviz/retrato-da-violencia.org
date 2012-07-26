@@ -165,6 +165,7 @@ Map = (function ($) {
       height: '40',
       barWidth: 20,
       barSpacing: 1,
+      chartRangeMin: 0,
       barColor: '#ffffff'});
   };
 
