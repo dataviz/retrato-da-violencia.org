@@ -79,7 +79,6 @@ ESTUPROS.each do |estupro|
   meses[mes] = (meses[mes] || 0) + 1
   dias_do_mes[dia] = (dias_do_mes[dia] || 0) + 1
 
-
   dados = { :municipio => municipio, 
             :turno => turno,
             :local => local,
@@ -101,12 +100,17 @@ results.each_pair do |codigo, estupros|
   media_idade_autor = estupros.map { |estupro| estupro[:idade_autor] }.inject(:+) / estupros.length
   consumados = estupros.select { |estupro| estupro[:consumado] }.length
   pela_manha = estupros.select { |estupro| estupro[:pela_manha] }.length
+  local = {
+      :residencia => estupros.select { |estupro| estupro[:local] =~ /Resid.ncia/ }.length,
+      :via_publica => estupros.select { |estupro| estupro[:local] == "Via Publica" }.length,
+  }
 
   resultado[codigo] = { :nome => MICROREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
                         :pela_manha => pela_manha,
                         :ocorrencias => estupros.length,
+                        :local => local,
                         :populacao => pop_por_regiao[codigo] }
 end
 
