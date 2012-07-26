@@ -175,4 +175,13 @@ Map = (function ($) {
 
 $(document).ready(function () {
   Map.initialize($('#map'), 'data/RioGrandedoSul_MesoMicroMunicip.svg');
+
+  $("#cta").click(function(e) {
+    e.preventDefault();
+    $(".modal").show();
+  });
+  $(".close-modal").click(function(e) {
+    e.preventDefault();
+    $(".modal").hide();
+  });
 });

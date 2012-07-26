@@ -9,69 +9,155 @@
   </head>
   <body>
     <div class="header">
-      <h1>Retrato da Violência Contra a Mulher</h1>
+      <div class="wrapper">
+        <h1>Retrato da Violência Contra a Mulher</h1>
+        <a href="#" id="cta">Denuncie</a>
+      </div>
     </div>
     <div class="main">
-      <div class="bar-graph">
-        <h3>Microregiões</h3>
-      </div>
-      <div id="info">
-        <div id="dashboard-header">
-          <div class="region-data">
-            <p class="population">População: <em></em></p>
+      <div class="wrapper">
+        <div class="bar-graph">
+          <h3>Microregiões</h3>
+        </div>
+        <div id="info">
+          <div id="dashboard-header">
+            <div class="region-data">
+              <p class="population">População: <em></em></p>
+            </div>
+            <h3></h3>
           </div>
-          <h3></h3>
+          <div id="dashboard-bar">
+            <section class="age">
+              <p>Idades médias</p>
+              <div class="age figures">
+                <p class="victim">
+                  <i class="icon victim"></i>
+                  <em></em>
+                </p>
+                <p class="author">
+                  <i class="icon author"></i>
+                  <em></em>
+                </p>
+              </div>
+              <div class="timeline">
+                <p>Ocorrências por ano (2006-2012)<br><span></span></p>
+              </div>
+            </section>
+            <section class="ranking">
+              <p>Ranking</p>
+              <p class="ranking"><em></em> /35</p>
+              <p>Proporção</p>
+              <p class="proporcao"><span><em></em> / 100 mil hab.</span></p>
+            </section>
+            <section class="period">
+              <p>Período</p>
+              <div class="figures period">
+                <p class="night"><i class="icon moon"></i> <em></em></p>
+                <p class="day"><i class="icon sun"></i> <em></em></p>
+              </div>
+              <p>Local</p>
+              <div class="local">
+                <p class="home"><i class="icon home"></i><br> <em></em></p>
+                <p class="street"><i class="icon street"></i><br> <em></em></p>
+                <p class="others"><i class="icon others"></i><br> <em></em></p>
+              </div>
+            </section>
+          </div>
         </div>
-        <div id="dashboard-bar">
-          <section class="age">
-            <p>Idades médias</p>
-            <div class="age figures">
-              <p class="victim">
-                <i class="icon victim"></i>
-                <em></em>
-              </p>
-              <p class="author">
-                <i class="icon author"></i>
-                <em></em>
-              </p>
-            </div>
-            <div class="timeline">
-              <p>Ocorrências por ano (2006-2012)<br><span></span></p>
-            </div>
-          </section>
-          <section class="ranking">
-            <p>Ranking</p>
-            <p class="ranking"><em></em> /35</p>
-            <p>Proporção</p>
-            <p class="proporcao"><span><em></em> / 100 mil hab.</span></p>
-          </section>
-          <section class="period">
-            <p>Período</p>
-            <div class="figures period">
-              <p class="night"><i class="icon moon"></i> <em></em></p>
-              <p class="day"><i class="icon sun"></i> <em></em></p>
-            </div>
-          </section>
-          <section class="local">
-            <div>
-              <p class="home"><i class="icon home"></i> <em></em></p>
-              <p class="street"><i class="icon street"></i> <em></em></p>
-              <p class="others"><i class="icon others"></i> <em></em></p>
-            </div>
-          </section>
+        <div id="map">
+          <img src="images/spinner.gif" class="loading">
         </div>
-        
-      </div>
-      <div id="map">
-        <img src="images/spinner.gif" class="loading">
       </div>
     </div>
     <div class="footer">
-      <p>Ajude a reverter esse quadro reportando qualquer tipo de violência
-      contra a mulher no telefone <a href="http://www.spm.rs.gov.br/">0800 541 0803</a></p>
-      <p>Feito com em <a href="http://www.acessoainformacao.rs.gov.br/conteudo/609/?Viol%C3%AAncia_con">estatísticas
-          do Estado do Rio Grande do Sul</a> no período entre janeiro 2006 e abril de 2012 (última atualização 16/05/12).</p>
       <p>Um projeto de <a href="http://twitter.com/vitorbaptista" target="_blank">Vitor Baptista</a>, <a href="http://twitter.com/leotartari" target="_blank">Leo Tartari</a> e <a href="http://twitter.com/tbueno" target="_blank">Thiago Bueno</a> para o <a href="http://www.decoders.w3c.br/" target="_blank">DecodeRS</a> utilizando dados disponibilizados pelo Governo do Estado do Rio Grande do Sul através do <a href="http://www.acessoainformacao.rs.gov.br/" target="_blank">portal de transparência</a>.</p>
+    </div>
+    <div class="modal">
+      <div class="wrapper">
+        <a href="#" class="close-modal">Fechar</a>
+        <p>Visualização baseada em <a target="_blank" href="http://www.acessoainformacao.rs.gov.br/conteudo/609/?Viol%C3%AAncia_con">estatísticas do estado do Rio Grande do Sul</a> no período de janeiro de 2006 a abril de 2012 (última atualização 16/05/12).</p>
+        <p>Ajude a reverter esse quadro reportando qualquer tipo de violência contra a mulher pelo telefone <a href="tel:08005410803">0800 541 0803</a>, junto ao Centro de Referência da Mulher Vânia Araújo Machado (CRM).</p>
+        <h3>Delegacias de Atendimento à Mulher:</h3>
+        <ul>
+          <li>
+            <h4>Passo Fundo</h4>
+            <p>Avenida Doutor Cézar Santos, nº 160 - Bairro: Petrópolis</p>
+            <p>(54) 3581-0725</p>
+            <p>passofundo-ppm@policiacivil.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Rio Grande</h4>
+            <p>Rua Almirante Barroso, n° 142 - Bairro: Centro</p>
+            <p>(53) 3293-1420</p>
+            <p>riogrande-pppm@policiacivil.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Lajeado</h4>
+            <p>Rua João Batista de Melo, nº 509 - Bairro: Centro</p>
+            <p>(51) 3748-6912</p>
+            <p>lajeado-dm@pc.gov.br</p> 
+          </li>
+          <li>
+            <h4>Erechim</h4>
+            <p>Rua Flores da Cunha, nº 91 - Bairro: Dal Molin</p>
+            <p>(54) 3321-9996</p>
+            <p>erechim-dm@pc.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Santa Maria</h4>
+            <p>Rua Duque de Caxias, nº 1169 - Bairro: Centro</p>
+            <p>(55) 3217-4485</p>
+            <p>santamaria-dm@pc.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Novo Hamburgo</h4>
+            <p>Rua Júlio de Castilhos, n° 806 - Bairro: Centro</p>
+            <p>(51)3584-5805	Fax:	 (51)3593-3096</p>
+            <p>delegaciaparamulher@pc.rs.gov.com</p>
+          </li>
+          <li>
+            <h4>Ijuí</h4>
+            <p>Avenida Coronel Dico, n° 747 - 2° Andar - Bairro: Assis Brasil - Referência: Ao lado da Praça dos Imigrantes</p>
+            <p>(55) 3332-8800</p>
+            <p>ijui-dm@pc.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Canoas</h4>
+            <p>Rua Cândido Machado, n° 106 - Bairro: Centro</p>
+            <p>(51) 3472-0490</p>
+            <p>canoa-dm@pc.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Cruz Alta</h4>
+            <p>Rua Coronel José Gabriel, n° 21 - Bairro: Vila Schettert</p>
+            <p>(55) 3322-7088</p>
+            <p>cruzalta-dm@pc.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Caxias do Sul</h4>
+            <p>Rua Dr. Montaury, n° 1387 - 1º Andar - Bairro : Centro</p>
+            <p>(54) 3221-1357</p>
+            <p>caxiasdosul-dm@policiacivil.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Pelotas</h4>
+            <p>Rua Barros Cassal, 516 - Térreo - Bairro: Areal</p>
+            <p>(53)3225-6888</p>
+            <p>pelotas-dm@policiacivil.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Porto Alegre</h4>
+            <p>Avenida João Pessoa, 2050 - Bairro: Azenha</p>
+            <p>(51) 3288-2172</p>
+            <p>poa-dm@pc.rs.gov.br</p>
+          </li>
+          <li>
+            <h4>Santa Cruz do Sul</h4>
+            <p>Rua João Werlang, nº 569 - Bairro: Belvedere</p>
+            <p>(51) 3711-4513</p>
+            <p>santacruz-dm@pc.rs.gov.br</p>
+          </li>
+      </ul>
     </div>
     <script src="javascript/libs/jquery-1.7.2.min.js"></script>
     <script src="javascript/libs/d3.v2.min.js"></script>
