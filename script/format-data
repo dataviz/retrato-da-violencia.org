@@ -110,7 +110,6 @@ results.each_pair do |codigo, estupros|
                         :media_idade_autor => media_idade_autor,
                         :pela_manha => pela_manha,
                         :ocorrencias => estupros.length,
-                        :populacao => pop_por_regiao[codigo]}
                         :local => local,
                         :populacao => pop_por_regiao[codigo] }
 
