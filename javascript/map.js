@@ -1,3 +1,4 @@
+
 Map = (function ($) {
   var Estupros = {};
 
@@ -35,6 +36,7 @@ Map = (function ($) {
 
     _classOnlyThisAs(id, 'active');
     _showInfo(id.replace(/.*_/, ''));
+    _draw_timeline(id);
     window.location.hash = id;
   };
 
@@ -131,10 +133,27 @@ Map = (function ($) {
     d3.select(region).on(eventName).call(region);
   };
 
+  function _draw_timeline(id) {
+    var cod = id.replace(/.*_/, '');
+    var regiao = Estupros[cod];
+    var years = [];
+    $.each(regiao.anos, function(i, v) {
+      years.push(v);
+    });
+    
+    $(".timeline").sparkline(years, {
+      type: 'bar',
+      height: '40',
+      barWidth: 20,
+      barColor: '#dc143c'});
+    
+    //$("#info .timeline span").text(regiao.anos);
+  };
+
   return {
     'initialize': initialize
   };
-})(Zepto);
+})(jQuery);
 
 $(document).ready(function () {
   Map.initialize($('#map'), 'data/RioGrandedoSul_MesoMicroMunicip.svg');
