@@ -83,7 +83,6 @@ Map = (function ($) {
     d3.selectAll('path.str3')
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
-          console.log(Estupros[id].range);
           return 'fill-opacity: '+Estupros[id].range / 5  ;
 
       })
