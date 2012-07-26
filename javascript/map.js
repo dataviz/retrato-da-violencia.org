@@ -158,11 +158,12 @@ Map = (function ($) {
       years.push(v);
     });
     
-    $(".timeline").sparkline(years, {
+    $(".timeline span").sparkline(years, {
       type: 'bar',
       height: '40',
       barWidth: 20,
-      barColor: '#dc143c'});
+      barSpacing: 1,
+      barColor: '#ffffff'});
   };
 
   return {
