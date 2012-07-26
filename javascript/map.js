@@ -11,8 +11,8 @@ Map = (function ($) {
         // Use Soledade as default
         if (focusedElementSlug == '') { focusedElementSlug = 'soledade'; };
         _focusInto(focusedElementSlug);
-        _colorRegions();
         _drawBars();
+        _colorRegions();
       });
     });
   };
@@ -93,12 +93,17 @@ Map = (function ($) {
     d3.selectAll('path.str3')
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
-          return 'fill-opacity: '+Estupros[id].range / 5  ;
-
+          return 'fill-opacity: '+Estupros[id].range / 5;
       })
       .each(function () {
           var d3Element = d3.select(this);
           d3Element.classed(d3Element.attr('id'), true);
+      });
+
+    d3.selectAll('.bar-graph li')
+      .attr('style', function (id) {
+        var d3RegionMap = d3.select('path.'+this.classList[0]);
+        return d3RegionMap.attr('style').replace('fill-', '');
       });
   };
 
