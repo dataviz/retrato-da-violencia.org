@@ -74,7 +74,6 @@ ESTUPROS.each do |estupro|
     end
   end
 
-  anos[ano] = (anos[ano] || 0) + 1
   dias_da_semana[dia_da_semana] = (dias_da_semana[dia_da_semana] || 0) + 1
   meses[mes] = (meses[mes] || 0) + 1
   dias_do_mes[dia] = (dias_do_mes[dia] || 0) + 1
@@ -86,32 +85,40 @@ ESTUPROS.each do |estupro|
             :idade_vitima => idade_vitima.to_i,
             :idade_autor => idade_autor.to_i,
             :pela_manha => pela_manha,
-            :populacao => populacao.to_i }
+            :populacao => populacao.to_i,
+            :ano => ano.to_i}
 
   codigo_microregiao = CODIGO_IBGE_MICROREGIOES[municipio]
   results[codigo_microregiao] ||= []
   results[codigo_microregiao] << dados
 end
 
+
+
 # Calcula estatísticas consolidadas por região
 resultado = {}
 results.each_pair do |codigo, estupros|
   media_idade_vitima = estupros.map { |estupro| estupro[:idade_vitima] }.inject(:+) / estupros.length
   media_idade_autor = estupros.map { |estupro| estupro[:idade_autor] }.inject(:+) / estupros.length
+
+  anos = {}
+  estupros.each { |estupro| anos[estupro[:ano]] = (anos[estupro[:ano]] || 0) + 1 }
+
   consumados = estupros.select { |estupro| estupro[:consumado] }.length
   pela_manha = estupros.select { |estupro| estupro[:pela_manha] }.length
   local = {
       :residencia => estupros.select { |estupro| estupro[:local] =~ /Resid.ncia/ }.length,
       :via_publica => estupros.select { |estupro| estupro[:local] == "Via Publica" }.length,
   }
-
+  
   resultado[codigo] = { :nome => MICROREGIOES[codigo.to_i],
                         :media_idade_vitima => media_idade_vitima,
                         :media_idade_autor => media_idade_autor,
                         :pela_manha => pela_manha,
                         :ocorrencias => estupros.length,
                         :local => local,
-                        :populacao => pop_por_regiao[codigo] }
+                        :populacao => pop_por_regiao[codigo],
+                        :anos => anos }
 
 end
 

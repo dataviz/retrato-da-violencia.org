@@ -1,3 +1,4 @@
+
 Map = (function ($) {
   var Estupros = {};
 
@@ -7,12 +8,12 @@ Map = (function ($) {
 
       _setupCallbacks();
       _loadEstupros(function () {
-        var focusedElementId = window.location.hash.replace('#', '');
+        var focusedElementSlug = window.location.hash.replace('#', '');
         // Use Soledade as default
-        if (focusedElementId == '') { focusedElementId = 'micro_430113'; };
-        _focusInto(focusedElementId);
-        _colorRegions();
+        if (focusedElementSlug == '') { focusedElementSlug = 'soledade'; };
+        _focusInto(focusedElementSlug);
         _drawBars();
+        _colorRegions();
       });
     });
   };
@@ -33,11 +34,13 @@ Map = (function ($) {
   };
 
   function _selectRegion() {
-    var id = this.id;
+    var id = this.id,
+        codigo = id.replace(/.*_/, '');
 
     _classOnlyThisAs(id, 'active');
-    _showInfo(id.replace(/.*_/, ''));
-    window.location.hash = id;
+    _draw_timeline(codigo);
+    _showInfo(codigo);
+    window.location.hash = $.slug(Estupros[codigo].nome);
   };
 
   function _showInfo(codigo) {
@@ -48,9 +51,9 @@ Map = (function ($) {
         night = 100 - day,
         ranking = _keysSortedByOpacity().indexOf(codigo) + 1,
         proporcao = regiao.proporcao,
-        residencia = Math.round((100 * regiao.local.residencia) / regiao.ocorrencias),
-        via_publica = Math.round((100 * regiao.local.via_publica) / regiao.ocorrencias),
-        outros = 100 - residencia - via_publica;
+        home = Math.round((100 * regiao.local.residencia) / regiao.ocorrencias),
+        street = Math.round((100 * regiao.local.via_publica) / regiao.ocorrencias),
+        others = 100 - home - street;
 
     $('#info h3').text(regiao.nome);
     $('.population em').text(_formatNumber(regiao.populacao));
@@ -58,6 +61,9 @@ Map = (function ($) {
     $('.author em').text(regiao.media_idade_autor);
     $('.night em').text(night+'%');
     $('.day em').text(day+'%');
+    $('.home em').text(home+'%');
+    $('.street em').text(street+'%');
+    $('.others em').text(others+'%');
     $('.ranking em').text(ranking+'ª');
     $('.proporcao em').text(proporcao);
   };
@@ -73,8 +79,15 @@ Map = (function ($) {
     });
   };
 
-  function _focusInto(id) {
-    var element = document.getElementById(id);
+  function _focusInto(slug) {
+    var element;
+
+    for (id in Estupros) {
+      if ($.slug(Estupros[id].nome) == slug) {
+        element = document.getElementById('micro_'+id);
+        break;
+      }
+    }
 
     if (!element) { return; }
 
@@ -85,12 +98,17 @@ Map = (function ($) {
     d3.selectAll('path.str3')
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
-          return 'fill-opacity: '+Estupros[id].range / 5  ;
-
+          return 'fill-opacity: '+Estupros[id].range / 5;
       })
       .each(function () {
           var d3Element = d3.select(this);
           d3Element.classed(d3Element.attr('id'), true);
+      });
+
+    d3.selectAll('.bar-graph li')
+      .attr('style', function (id) {
+        var d3RegionMap = d3.select('path.'+this.classList[0]);
+        return d3RegionMap.attr('style').replace('fill-', '');
       });
   };
 
@@ -133,10 +151,24 @@ Map = (function ($) {
     d3.select(region).on(eventName).call(region);
   };
 
+  function _draw_timeline(cod) {
+    var regiao = Estupros[cod];
+    var years = [];
+    $.each(regiao.anos, function(i, v) {
+      years.push(v);
+    });
+    
+    $(".timeline").sparkline(years, {
+      type: 'bar',
+      height: '40',
+      barWidth: 20,
+      barColor: '#dc143c'});
+  };
+
   return {
     'initialize': initialize
   };
-})(Zepto);
+})(jQuery);
 
 $(document).ready(function () {
   Map.initialize($('#map'), 'data/RioGrandedoSul_MesoMicroMunicip.svg');
