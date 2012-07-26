@@ -73,7 +73,7 @@ Map = (function ($) {
   };
 
   function _loadEstupros(callback) {
-    $.getJSON('data/dados_estupros.json', function (data) {
+    $.getJSON('/data/dados_estupros.json', function (data) {
       Estupros = data;
       callback();
     });
@@ -174,7 +174,7 @@ Map = (function ($) {
 })(jQuery);
 
 $(document).ready(function () {
-  Map.initialize($('#map'), 'data/RioGrandedoSul_MesoMicroMunicip.svg');
+  Map.initialize($('#map'), '/data/RioGrandedoSul_MesoMicroMunicip.svg');
 
   $("#cta").click(function(e) {
     e.preventDefault();
