@@ -32,6 +32,10 @@ body {
 .modal ul {
   overflow-y: scroll;
   height: 300px;
+  list-style: square inside;
+}
+.modal h4 {
+  color: crimson;
 }
 .header {
   font-size: 1.2em;
@@ -58,7 +62,7 @@ body {
   border-color: black;
 }
 .header h1 {
-  margin: 0 0 0 40px;
+  margin: 0;
   padding: 0;
   display: inline-block;
 }
