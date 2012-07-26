@@ -106,9 +106,11 @@ Map = (function ($) {
       });
 
     d3.selectAll('.bar-graph li')
-      .attr('style', function (id) {
-        var d3RegionMap = d3.select('path.'+this.classList[0]);
-        return d3RegionMap.attr('style').replace('fill-', '');
+      .each(function (id) {
+        var d3RegionMap = d3.select('path.'+this.classList[0]),
+            opacity = d3RegionMap.attr('style').replace(/.*: (.*);?/, '$1'),
+            span = d3.select(this).select('span');
+        span.attr('style', span.attr('style') + '; background-color: rgba(220,20,60,'+ opacity +') !important;');
       });
   };
 
