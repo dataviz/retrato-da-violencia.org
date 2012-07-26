@@ -7,10 +7,10 @@ Map = (function ($) {
 
       _setupCallbacks();
       _loadEstupros(function () {
-        var focusedElementId = window.location.hash.replace('#', '');
+        var focusedElementSlug = window.location.hash.replace('#', '');
         // Use Soledade as default
-        if (focusedElementId == '') { focusedElementId = 'micro_430113'; };
-        _focusInto(focusedElementId);
+        if (focusedElementSlug == '') { focusedElementSlug = 'soledade'; };
+        _focusInto(focusedElementSlug);
         _colorRegions();
         _drawBars();
       });
@@ -33,11 +33,12 @@ Map = (function ($) {
   };
 
   function _selectRegion() {
-    var id = this.id;
+    var id = this.id,
+        codigo = id.replace(/.*_/, '');
 
     _classOnlyThisAs(id, 'active');
-    _showInfo(id.replace(/.*_/, ''));
-    window.location.hash = id;
+    _showInfo(codigo);
+    window.location.hash = $.slug(Estupros[codigo].nome);
   };
 
   function _showInfo(codigo) {
@@ -73,8 +74,15 @@ Map = (function ($) {
     });
   };
 
-  function _focusInto(id) {
-    var element = document.getElementById(id);
+  function _focusInto(slug) {
+    var element;
+
+    for (id in Estupros) {
+      if ($.slug(Estupros[id].nome) == slug) {
+        element = document.getElementById('micro_'+id);
+        break;
+      }
+    }
 
     if (!element) { return; }
 
