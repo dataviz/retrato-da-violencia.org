@@ -39,7 +39,7 @@ body {
 .bar-graph {
   float: right;
   width: 400px;
-  padding-right: 4em;
+  white-space: nowrap;
 }
 .bar-graph ul {
   list-style: none;
@@ -63,43 +63,46 @@ body {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
+  color: #FFE;
+  text-shadow: rgba(0,0,0,.3) 0 -1px 0;
 }
 .bar-graph .meter:hover,
+.bar-graph .meter.active,
 .bar-graph .meter.hover {
   border-color: black;
   background-color: rgb(220, 20, 60);
 }
-#info {
-  font-size: .7em;
-  margin: 0 4em;
-  padding-bottom: 1em;
-  border-bottom: 1px solid crimson;
-  top: 40px;
-  right: 40px;
-  width: 310px;
+#info section {
+  background: crimson;
+  color: white;
+  display: table-cell;
+  height: 130px;
+  border: 1px solid crimson;
+  vertical-align: top;
 }
 #map {
   width: 600px;
   height: 600px;
-  margin: 0 auto;
 }
-#info h3 {
+h3 {
   color: crimson;
   font-size: 2em;
-  border-bottom: 3px solid crimson;
-}
-#info p {
-  font-size: 1.5em;
-  line-height: 2em;
-  color: #777;
+  margin: 0;
 }
 #info p em {
-  color: #333;
   font-weight: bold;
   font-style: normal;
-  font-size: 4em;
+  font-size: 3em;
   display: block;
-  color: crimson;
+  color: white;
+}
+#info .region-data {
+  float: right;
+}
+#info .region-data em {
+  font-size: 1em;
+  color: black;
+  display: inline;
 }
 #info .figures {
   clear: both;
@@ -113,7 +116,7 @@ body {
   margin-right: 2em;
 }
 #map .loading {
-  margin: 200px auto;
+  margin: 300px auto;
   display: block;
 }
 
@@ -159,11 +162,10 @@ path.active {
   background-position: 0 0;
 }
 .icon.victim {
-  width: 51px;
-  margin-top: 20px;
-  height: 106px;
+  width: 58px;
+  height: 125px;
   display: block;
-  background-position: -155px -21px;
+  background-position: -150px 0;
 }
 .icon.author {
   width: 48px;
@@ -171,3 +173,12 @@ path.active {
   display: block;
   background-position: -216px 0;
 }
+
+/* DASHBOARD */
+#dashboard-header {
+  overflow: hidden;
+}
+section.age .figures {
+  width: 200px;
+}
+
