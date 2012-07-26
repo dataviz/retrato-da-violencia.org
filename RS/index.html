@@ -72,12 +72,17 @@
       </div>
     </div>
     <div class="footer">
-      <p>Um projeto de <a href="http://vitorbaptista.com"
-          target="_blank">Vitor Baptista</a>, <a
-          href="http://leotartari.com" target="_blank">Leo Tartari</a>
-      e <a href="http://tbueno.com" target="_blank">Thiago Bueno</a>
-      para o <a href="http://www.decoders.w3c.br/" target="_blank">Decoders RS</a> utilizando dados disponibilizados pelo Governo do Estado do Rio Grande do Sul através do <a href="http://www.acessoainformacao.rs.gov.br/" target="_blank">portal de transparência</a>.</p>
-      <p><a href="https://github.com/vitorbaptista/retrato-da-violencia">Código no GitHub</a></p>
+      <div class="wrapper">
+        <p>Um projeto de <a href="http://vitorbaptista.com"
+            target="_blank">Vitor Baptista</a>, <a
+            href="http://leotartari.com" target="_blank">Leo Tartari</a>
+        e <a href="http://tbueno.com" target="_blank">Thiago Bueno</a>
+        para o <a href="http://www.decoders.w3c.br/" target="_blank">Decoders RS</a> utilizando dados disponibilizados pelo Governo do Estado do Rio Grande do Sul através do <a href="http://www.acessoainformacao.rs.gov.br/" target="_blank">portal de transparência</a>.</p>
+        <p><a href="https://github.com/vitorbaptista/retrato-da-violencia">Código no GitHub</a></p>
+        <div class="facebook">
+          <div class="fb-like" data-href="http://retratodaviolencia.org" data-send="false" data-width="450" data-show-faces="false" data-action="recommend" data-font="arial"></div>
+        </div>
+      </div>
     </div>
     <div class="modal">
       <div class="wrapper">
@@ -171,6 +176,14 @@
     <script src="/javascript/libs/jquery.sparkline.min.js"></script>
     <script src="/javascript/map.js"></script>
     <script src="/javascript/utils.js"></script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-33676321-1']);

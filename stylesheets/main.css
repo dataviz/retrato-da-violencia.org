@@ -78,6 +78,7 @@ body {
   background-color: crimson;
   color: white;
   padding: 1em 0;
+  overflow: hidden;
 }
 .footer a {
   color: white;
@@ -86,8 +87,11 @@ body {
   color: gold;
 }
 .footer p {
-  width: 40em;
   margin: 0 auto;
+}
+.footer .facebook {
+  width: 450px;
+  float: right;
 }
 .bar-graph {
   float: right;
