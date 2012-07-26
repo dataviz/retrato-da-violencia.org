@@ -41,6 +41,8 @@ Map = (function ($) {
     _draw_timeline(codigo);
     _showInfo(codigo);
     window.location.hash = $.slug(Estupros[codigo].nome);
+    if (_gaq) { _gaq.push(['_trackPageview', window.location.pathname +
+                                             window.location.hash]); }
   };
 
   function _showInfo(codigo) {
