@@ -1,25 +1,45 @@
 body {
-  border-top: 4px solid crimson;
   margin: 0;
   padding: 0;
   background: #ffe url(../images/background-texture.png) repeat scroll left top;
   font-size: 100%;
   font-family: Rokkitt, Georgia, serif;
 }
+* {
+  box-sizing: border-box;
+}
 .header {
-  padding: .5em 2em;
   font-size: 1.2em;
-  width: 600px;
   margin: 0 auto;
+}
+.header h1 {
+  background: crimson;
+  margin: 0;
+  padding: 0;
+  color: white;
 }
 .main {
   position: relative;
 }
+.footer {
+  background-color: crimson;
+  color: white;
+  padding: 1em 0;
+}
+.footer a {
+  color: white;
+}
+.footer a:hover {
+  color: gold;
+}
+.footer p {
+  width: 40em;
+  margin: 0 auto;
+}
 .bar-graph {
-  position: absolute;
+  float: right;
   width: 400px;
-  left: 20px;
-  top: 40px;
+  padding-right: 4em;
 }
 .bar-graph ul {
   list-style: none;
@@ -28,27 +48,28 @@ body {
 }
 .bar-graph li {
   margin-bottom: 1px;
-}
-.bar-graph b { 
-  display: none;
+  text-align: right;
 }
 .bar-graph .meter {
-  display: block;
-  background-color: crimson;
-  height: 1em;
+  padding: .25em .5em;
+  font-weight: 900;
+  text-align: right;
+  display: inline-block;
+  background-color: rgba(220, 20, 60, .8);
+  font-size: .85em;
+  height: 2em;
   cursor: pointer;
   border: 1px solid transparent;
-  opacity: .8;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.bar-graph .meter:hover {
+.bar-graph .meter:hover,
+.bar-graph .meter.hover {
   border-color: black;
-  opacity: 1;
+  background-color: rgb(220, 20, 60);
 }
 #info {
-  position: absolute;
   font-size: .7em;
   margin: 0 4em;
   padding-bottom: 1em;

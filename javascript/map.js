@@ -17,23 +17,23 @@ Map = (function ($) {
 
   function _setupCallbacks() {
     d3.selectAll('path.str3')
-      .on('mouseover', _hover)
+      .on('mouseover', _hoverRegion)
       .on('click', _selectRegion);
   };
 
-  function _hover() {
-    _classOnlyThisPathAs(this, 'hover');
+  function _hoverRegion() {
+    _classOnlyThisAs(this.id, 'hover');
   };
 
-  function _classOnlyThisPathAs(path, className) {
-    d3.select('path.'+className).classed(className, false);
-    d3.select(path).classed(className, true);
+  function _classOnlyThisAs(id, className) {
+    d3.selectAll('.'+className).classed(className, false);
+    d3.selectAll('.'+id).classed(className, true);
   };
 
   function _selectRegion() {
-    var id = d3.select(this).attr('id');
+    var id = this.id;
 
-    _classOnlyThisPathAs(this, 'active');
+    _classOnlyThisAs(id, 'active');
     _showInfo(id.replace(/.*_/, ''));
     window.location.hash = id;
   };
@@ -58,7 +58,7 @@ Map = (function ($) {
   };
 
   function _formatNumber(number) {
-      return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
   };
 
   function _loadEstupros(callback) {
@@ -81,14 +81,20 @@ Map = (function ($) {
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
           return 'fill-opacity: '+Estupros[id].range / 5  ;
+
+      })
+      .each(function () {
+          var d3Element = d3.select(this);
+          d3Element.classed(d3Element.attr('id'), true);
       });
-  }
+  };
 
   function _drawBars() {
     d3.select('.bar-graph').append('ul').selectAll('li')
       .data(_keysSortedByOpacity()).enter().append('li')
+      .attr('class', function (id) { return 'micro_'+id; })
       .html(_barInfo)
-      .on('mouseover', _mouseOverRegion)
+      .on('mouseover', _hoverBar)
       .on('click', _clickRegion);
   };
 
@@ -100,28 +106,27 @@ Map = (function ($) {
     });
 
     return sortedKeys;
-  }
+  };
 
   function _barInfo(id) {
     var regiao = Estupros[id],
-        nome = "<b>"+regiao.nome+"</b>",
-        meter = "<span class='meter' style='width: "+regiao.opacity*100+"%'></span>";
+        meter = "<span class='meter' style='width: "+regiao.opacity*100+"%'>"+regiao.nome+"</span>";
 
-    return nome+meter;
+    return meter;
   }
 
-  function _mouseOverRegion(id) {
-    _sendEventToRegion(id, 'mouseover');
-  }
+  function _hoverBar(id) {
+    _classOnlyThisAs('micro_'+id, 'hover');
+  };
 
   function _clickRegion(id) {
     _sendEventToRegion(id, 'click');
-  }
+  };
 
   function _sendEventToRegion(id, eventName) {
     var region = document.getElementById('micro_'+id);
     d3.select(region).on(eventName).call(region);
-  }
+  };
 
   return {
     'initialize': initialize
