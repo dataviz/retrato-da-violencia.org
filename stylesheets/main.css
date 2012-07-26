@@ -212,7 +212,9 @@ path.hover {
   cursor: pointer;
 }
 path.active {
-  fill-opacity: .5;
+  stroke: black !important;
+  stroke-width: 1500px;
+  stroke-opacity: .5;
   cursor: default;
 }
 /* icons */
