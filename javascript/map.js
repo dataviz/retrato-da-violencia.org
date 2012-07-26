@@ -45,7 +45,10 @@ Map = (function ($) {
     var day = Math.round(100 * regiao.pela_manha / regiao.ocorrencias),
         night = 100 - day,
         ranking = _keysSortedByOpacity().indexOf(codigo) + 1,
-        proporcao = regiao.proporcao;
+        proporcao = regiao.proporcao,
+        residencia = Math.round((100 * regiao.local.residencia) / regiao.ocorrencias),
+        via_publica = Math.round((100 * regiao.local.via_publica) / regiao.ocorrencias),
+        outros = 100 - residencia - via_publica;
 
     $('#info h3').text(regiao.nome);
     $('.population em').text(_formatNumber(regiao.populacao));
@@ -80,7 +83,8 @@ Map = (function ($) {
     d3.selectAll('path.str3')
       .attr('style', function () {
           var id = d3.select(this).attr('id').replace(/.*_/, '');
-          return 'fill-opacity: '+Estupros[id].opacity;
+          return 'fill-opacity: '+Estupros[id].range / 5  ;
+
       })
       .each(function () {
           var d3Element = d3.select(this);
