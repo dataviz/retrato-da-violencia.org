@@ -22,6 +22,12 @@ body {
   width: 600px;
   margin: 40px auto;
   padding: 40px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.modal .close-modal {
+  float: right;
 }
 .modal ul {
   overflow-y: scroll;
@@ -153,6 +159,12 @@ h3 {
 }
 #info .local p {
   display: inline-block !important;
+}
+#info div.ratio {
+  margin-top: 56px;
+}
+#info div.timeline {
+  margin-top: 8px;
 }
 #info .timeline canvas {
   margin-left: 40px;
