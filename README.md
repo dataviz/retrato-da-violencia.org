@@ -3,6 +3,13 @@ Retrato da Violência
 
 Visualização dos dados de violência contra a mulher do Rio Grande do Sul.
 
+Usando
+======
+
+Essa é uma aplicação estática, usando só JavaScript e HTML5. Para instalar, basta
+colocá-la em um servidor web. No Linux ou Mac, você também pode executar o start-server 
+e abrir a página http://localhost:8000.
+
 Licença
 =======
 
