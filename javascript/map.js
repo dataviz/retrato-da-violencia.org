@@ -8,6 +8,8 @@ Map = (function ($) {
       _setupCallbacks();
       _loadEstupros(function () {
         var focusedElementId = window.location.hash.replace('#', '');
+        // Use Soledade as default
+        if (focusedElementId == '') { focusedElementId = 'micro_430113'; };
         _focusInto(focusedElementId);
         _colorRegions();
         _drawBars();
