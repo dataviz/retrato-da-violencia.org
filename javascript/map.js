@@ -51,9 +51,9 @@ Map = (function ($) {
         night = 100 - day,
         ranking = _keysSortedByOpacity().indexOf(codigo) + 1,
         proporcao = regiao.proporcao,
-        residencia = Math.round((100 * regiao.local.residencia) / regiao.ocorrencias),
-        via_publica = Math.round((100 * regiao.local.via_publica) / regiao.ocorrencias),
-        outros = 100 - residencia - via_publica;
+        home = Math.round((100 * regiao.local.residencia) / regiao.ocorrencias),
+        street = Math.round((100 * regiao.local.via_publica) / regiao.ocorrencias),
+        others = 100 - home - street;
 
     $('#info h3').text(regiao.nome);
     $('.population em').text(_formatNumber(regiao.populacao));
@@ -61,6 +61,9 @@ Map = (function ($) {
     $('.author em').text(regiao.media_idade_autor);
     $('.night em').text(night+'%');
     $('.day em').text(day+'%');
+    $('.home em').text(home+'%');
+    $('.street em').text(street+'%');
+    $('.others em').text(others+'%');
     $('.ranking em').text(ranking+'ª');
     $('.proporcao em').text(proporcao);
   };
