@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://retratodaviolencia.org/sitemap.xml
