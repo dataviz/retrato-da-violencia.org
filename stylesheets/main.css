@@ -41,6 +41,7 @@ body {
   font-size: 1.2em;
   background: crimson;
   color: white;
+  overflow: hidden;
 }
 .header a {
   display: inline-block;
@@ -64,7 +65,7 @@ body {
 .header h1 {
   margin: 0;
   padding: 0;
-  display: inline-block;
+  float: left;
 }
 .wrapper {
   width: 1000px;
@@ -99,6 +100,7 @@ body {
   width: 300px;
   font-size: .85em;
   white-space: nowrap;
+  clear: right;
 }
 .bar-graph ul {
   list-style: none;
