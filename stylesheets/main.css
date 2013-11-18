@@ -91,10 +91,34 @@ body {
   margin: 0 auto;
   text-align: center;
 }
-.footer .facebook {
-  width: 450px;
-  float: right;
+.colophon {
+  text-align: center;
 }
+.colophon .facebook {
+  width: 340px;
+  margin: 1em auto;
+}
+.colophon .supported-by {
+  background: white;
+  padding: 1em;
+}
+.colophon .supported-by strong {
+  color: crimson;
+  display: block;
+}
+.colophon .supported-by a {
+  border: 2px solid #ddd;
+  display: inline-block;
+  padding: 1em;
+  border-radius: 4px;
+}
+.colophon .supported-by a:hover {
+  border-color: crimson;
+}
+.colophon .supported-by a img {
+  max-height: 50px;
+}
+
 .bar-graph {
   float: right;
   width: 300px;
