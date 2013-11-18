@@ -38,29 +38,29 @@ body {
   color: crimson;
 }
 .header {
-  font-size: 1.2em;
-  background: crimson;
-  color: white;
+  font-size: 1em;
+  padding: 1em 0;
+  color: crimson;
   overflow: hidden;
 }
 .header a {
   display: inline-block;
-  color: white;
-  border: 1px solid white;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
+  color: crimson;
+  border: 2px solid crimson;
   border-radius: 4px;
   float: right;
   text-decoration: none;
-  margin-top: 5px;
   padding: .25em .5em;
-  text-shadow: rgba(0,0,0,.5) 0 1px 0;
+  font-size: 1.25em;
 }
 .header a:hover {
-  background-color: rgba(255,255,255,.2);
+  color: black;
+  border-color: black;
 }
 .header a:active {
-  border-color: black;
+  color: white;
+  background-color: crimson;
+  border-color: crimson;
 }
 .header h1 {
   margin: 0;
@@ -168,9 +168,6 @@ body {
 #info h3 {
   color: white;
   padding: .25em;
-}
-#dashboard-header {
-  border-bottom: 1px solid white;
 }
 #info section {
   color: white;
